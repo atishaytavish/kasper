@@ -54,6 +54,16 @@ export const getDevices = async (req,res,next)=>{
   }
 }
 
+export const getAllDevices = async (req,res,next)=>{
+  try{
+    const nullUserIdDevices = await Device.find({ alloted_to_user:req.params.id}).exec();
+    res.json(nullUserIdDevices);
+  } catch (err) {
+    next(err);
+  }
+}
+
+
 export const unallocatedDevice = async(req, res, next) => {
   const userId = req.params.userId;
   const unused = [];
