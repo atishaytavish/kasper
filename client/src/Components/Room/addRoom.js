@@ -15,9 +15,9 @@ const AddRooms = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUser = await axios.post('/rooms/', {
-      room_name: formData.roomname,
+    const newUser = await axios.post('/rooms/1', {
       room_id: formData.roomid,
+      room_name: formData.roomname,
       device_id: formData.deviceId,
     })
 
@@ -47,7 +47,7 @@ const AddRooms = () => {
         <h2>Add Rooms</h2>
         <input
           type="text"
-          name="id"
+          name="roomid"
           placeholder="Room ID"
           style={inputStyle}
           value={formData.roomid}
@@ -55,7 +55,7 @@ const AddRooms = () => {
         />
         <input
           type="text"
-          name="username"
+          name="roomname"
           placeholder="Room Name"
           style={inputStyle}
           value={formData.roomname}
@@ -63,8 +63,8 @@ const AddRooms = () => {
         />
         <input
           type="text"
-          name="id"
-          placeholder="Device ID"
+          name="deviceId"
+          placeholder="deviceId"
           style={inputStyle}
           value={formData.deviceId}
           onChange={handleInputChange}
