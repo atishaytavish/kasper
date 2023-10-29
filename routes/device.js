@@ -1,5 +1,5 @@
 import express from "express";
-import {allocateDevice, countunallocated, createDevice,updateDevice,getDevices,unallocatedDevice, getADevice} from "../controllers/Device.js"
+import {allocateDevice, countunallocated, createDevice,updateDevice,getDevices,unallocatedDevice, getADevice, getAllDevices} from "../controllers/Device.js"
 
 const router = express.Router();
 
@@ -10,6 +10,7 @@ router.get("/getalldevice/devices",getDevices);
 router.put("/updateDevice",updateDevice);
 router.get("/unallocatedDevice/:userId",unallocatedDevice);
 router.post("/allocateDevice",allocateDevice);
+router.get("/getalldevice/:id",getAllDevices);
 
 
 export default router;
