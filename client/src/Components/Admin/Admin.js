@@ -11,7 +11,8 @@ function Admin() {
   useEffect(() => {
     const fetchState = async () => {
       const fetchedData = await axios.get("/device/getalldevice/devices");
-      setData(fetchedData.data)
+      setData(fetchedData.data);
+      console.log(fetchedData.data);
     }
 
     fetchState();

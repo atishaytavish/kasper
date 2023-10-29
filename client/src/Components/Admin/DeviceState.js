@@ -52,7 +52,7 @@ const Room = ({DeviceData}) => {
 
         <div className='but-con'>
         <button style={buttonStyle}>Misc</button>
-        <button  style={buttonStyle}>{DeviceData.state.misc ? <ToggleOnIcon className='ToggleOnIcon'/> : 
+        <button  style={buttonStyle}>{DeviceData.state.mis ? <ToggleOnIcon className='ToggleOnIcon'/> : 
         <ToggleOffIcon className='ToggleOffIcon'/>}</button>
         </div>
 
