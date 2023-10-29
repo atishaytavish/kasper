@@ -38,7 +38,7 @@ const NavbarMenu = () => {
       <div style={moveleft}>
         <Link style={nav} to="/">Admin</Link>
         <Link style={nav} to="/customer-login">Customer</Link>
-        <Link style={nav} to="/room">Room</Link>
+        {/* <Link style={nav} to="/room">Room</Link> */}
       </div>
     </div>
   );
