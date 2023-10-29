@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import NavbarMenu from '../NavbarMenu';
+import { redirect } from 'react-router-dom';
 
 const CustomerLogin = () => {
   const [formData, setFormData] = useState({
@@ -15,16 +16,19 @@ const CustomerLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/cutomer-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        alert('Data saved to MongoDB!');
-      }
+        const fetchData = async () => {
+          const userData = await axios.post('/user/login',{
+            name:formData.name,
+            password:formData.password,
+          });
+          setUser(userData);
+          if(user){
+            localStorage.setItem('user', user);
+            redirect('/room')
+          }
+        }
+    
+        fetchData();
     } catch (error) {
       console.error('Error:', error);
     }
@@ -46,7 +50,8 @@ const CustomerLogin = () => {
     border: '1px solid #ccc',
     borderRadius: '5px',
   };
-
+  const [user,setUser] = useState();
+  
   return (
     <div>
       <NavbarMenu />
@@ -71,6 +76,7 @@ const CustomerLogin = () => {
         <button type="submit" style={{ backgroundColor: 'blue', color: 'white', padding: '10px', borderRadius: '5px' }}>
           Login
         </button>
+        
       </form>
     </div>
   );

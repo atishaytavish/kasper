@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import NavbarMenu from '../NavbarMenu';
+import axios from 'axios';
+import { redirect, useNavigate } from 'react-router-dom';
 
 const CustomerLogin = () => {
+  const [user, setUser] = useState(null)
   const [formData, setFormData] = useState({
     name: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -14,21 +19,28 @@ const CustomerLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // const navigate = useNavigate();
     try {
-      const response = await fetch('/api/cutomer-login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        alert('Data saved to MongoDB!');
-      }
+        const fetchData = async () => {
+          // console.log(formData)
+          const userData = await axios.post('/users/login',{
+            username:formData.name,
+            password:formData.password,
+          });
+          console.log(userData.data)
+          setUser(userData.data);
+          if(userData.data){
+            localStorage.setItem('user', JSON.stringify(userData.data));
+            navigate("/room");
+          }
+        }
+        // return redirect("/room");
+    
+        fetchData();
     } catch (error) {
       console.error('Error:', error);
     }
-  }
+  };
 
   const formStyle = {
     maxWidth: '300px',
