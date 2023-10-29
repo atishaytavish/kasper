@@ -2,10 +2,13 @@ import Room from "../models/room.js";
 import User from "../models/user.js";
 
 export const createRoom = async (req, res, next) => {
-  const newRoom = new Room(req.body);
+  const newRoom = new Room({
+    ...req.body,
+    user_id:req.params.id
+  });
 
   try {
-    // console.log(newRoom)
+    console.log(newRoom)
     const savedRoom = await newRoom.save();
 
     try {
